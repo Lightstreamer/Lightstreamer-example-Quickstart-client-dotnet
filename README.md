@@ -4,6 +4,8 @@
 Contains the C# source files of a sample application that uses [Lightstreamer .NET Client API](http://www.lightstreamer.com/docs/client_dotnet_api/frames.html) and can be used to test the capability of the Client API to connect and receive data from Lightstreamer Server.
 These source files can be used as a starting point for a Client application implementation or as a reference use of the Client API.<br>
 
+![screenshot](screen_qs.png)<br>
+
 TestClient.cs contains the source Main(). Please, refer to the instructions included in this source file in order to configure and run the tests.
 The test includes the necessary code and a sample configuration file for Library logging through [Log4Net](http://logging.apache.org/log4net/index.html).
   
