@@ -1,7 +1,7 @@
 # Lightstreamer - Quickstart Example - .NET Client #
 <!-- START DESCRIPTION lightstreamer-example-quickstart-client-dotnet -->
 
-Contains the C# source files of a sample application that uses [Lightstreamer .NET Client API](http://www.lightstreamer.com/docs/client_dotnet_api/frames.html) and can be used to test the capability of the Client API to connect and receive data from Lightstreamer Server.
+This project contains the C# source files of a sample application that uses [Lightstreamer .NET Client API](http://www.lightstreamer.com/docs/client_dotnet_api/frames.html) and can be used to test the capability of the Client API to connect and receive data from Lightstreamer Server.
 These source files can be used as a starting point for a Client application implementation or as a reference use of the Client API.<br>
 
 ![screenshot](screen_qs.png)<br>
