@@ -31,7 +31,7 @@ namespace Lightstreamer.DotNet.Client.Test {
     /// Opens a connection to Lightstreamer Server and subscribes to a table,
     /// defined with either a SimpleTableInfo or an ExtendedTableInfo.
     /// It requires that Lightstreamer Server is running with the
-    /// DEMO Adapter Set installed.
+    /// FULLPORTFOLIODEMO Adapter Set installed.
     /// 
     /// The test can be invoked in five different ways:
     /// TestClient HOST PORT
@@ -84,7 +84,7 @@ namespace Lightstreamer.DotNet.Client.Test {
 
             ConnectionInfo connInfo= new ConnectionInfo();
             connInfo.PushServerUrl= "http://" + pushServerHost + ":" + pushServerPort;
-            connInfo.Adapter= "DEMO";
+            connInfo.Adapter= "FULLPORTFOLIODEMO";
 
             LSClient myClient = new LSClient();
             myClient.OpenConnection(connInfo, new TestConnectionListener());
