@@ -67,6 +67,10 @@ namespace Lightstreamer.DotNet.Client.Test {
         /// <throws>Exception Thrown in case of any error.</throws>
         public static void Main(string[] args) {
 
+            // socket timeout settings; obeyed by library version 2.1.1 build 1005 and later
+            AppDomain.CurrentDomain.SetData("lightstreamer.client.defaultConnectTimeout", 10000);
+            AppDomain.CurrentDomain.SetData("lightstreamer.client.defaultReadTimeout", 10000);
+
             LSClient.SetLoggerProvider(new Log4NetLoggerProviderWrapper());
 
             string pushServerHost = args[0];
