@@ -24,7 +24,7 @@ To build and install a version of this demo, pointing to your local Lightstreame
 * Create a new C# project (we used Microsoft's [Visual C# Express Edition](http://www.visualstudio.com/it-it/products/visual-studio-express-vs)): from the "New Project..." wizard, choose the "Console Application" template, and use "quickstart" as project name.
 * From the "Solution Explorer", delete the default `Program.cs`.
 * Add a reference to the Lightstreamer .NET Client library and the Log4net library: go to the "Browse" tab of the "Add Reference" dialog and point to the `DotNetClient_N2.dll`, `DotNetClient_N2.pdb`, and `Log4Net.dll` files in the `lib` folder.
-* Add the `TestClient.cs`, `TestConnectionListener.cs, `TestTableListener.cs`, and the `Log4NetLogging.cs` files from the "Add -> Existing Item" dialog.
+* Add the `TestClient.cs`, `TestConnectionListener.cs`, `TestTableListener.cs`, and the `Log4NetLogging.cs` files from the "Add -> Existing Item" dialog.
 * Build the `quickstart.exe` file: from the Build menu, choose "Build Solution".
 * Run the demo. The host name and the port number of the Lightstreamer server have to be passed to the application as command line arguments.<BR/>
 `> quickstart.exe localhost 8080`
