@@ -1,6 +1,6 @@
 # Lightstreamer - Quickstart Example - .NET Client #
 <!-- START DESCRIPTION lightstreamer-example-quickstart-client-dotnet -->
-The *Quickstart Example* provides the source code to build very a simple and basic client application, used to test the capability of the Client APIs to connect and receive data from Lightstreamer Server. The example can be used to familiarize with the Client APIs and as a reference on how to use them, and can be used as a starting point for client application implementations.
+The *Quickstart Example* provides the source code to build a very simple and basic client application, used to test the capability of the Client APIs to connect and receive data from Lightstreamer Server. The example can be used to familiarize with the Client APIs and as a reference on how to use them, and can be used as a starting point for client application implementations.
 
 This project contains the C# source files of a sample application, which shows how the [Lightstreamer .NET PCL Client API](http://www.lightstreamer.com/api/ls-pcl-client/latest/) can be used to connect to Lightstreamer Server.
 <!-- END DESCRIPTION lightstreamer-example-quickstart-client-dotnet -->
