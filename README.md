@@ -49,4 +49,4 @@ To build and install a version of this demo, pointing to your local Lightstreame
 ## Lightstreamer Compatibility Notes
 
 - Compatible with Lightstreamer .NET PCL Client Library version 3.0.0 or newer.
-- For Lightstreamer Allegro (+ .NET Client API support), Presto, Vivace.
+- Ensure that .NET PCL Client API is supported by Lightstreamer Server license configuration.
