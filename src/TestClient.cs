@@ -23,7 +23,7 @@ using System.Threading;
 [assembly:log4net.Config.XmlConfigurator()]
 // this requires the .exe.config file provided
 
-namespace Lightstreamer.DotNet.Client.Test {
+namespace Lightstreamer.DotNetStandard.Client.Test {
     
     /// <summary>
     /// Demonstrates basic Server access support, through LSClient facade.
@@ -86,9 +86,13 @@ namespace Lightstreamer.DotNet.Client.Test {
 
             Thread.Sleep(2000);
 
-            ConnectionInfo connInfo= new ConnectionInfo();
-            connInfo.PushServerUrl= "http://" + pushServerHost + ":" + pushServerPort;
-            connInfo.Adapter= "FULLPORTFOLIODEMO";
+            ConnectionInfo connInfo = new ConnectionInfo
+            {
+                PushServerUrl = "http://" + pushServerHost + ":" + pushServerPort,
+                Adapter = "DEMO",
+
+                ReconnectionTimeoutMillis = 20000
+            };
 
             LSClient myClient = new LSClient();
             myClient.OpenConnection(connInfo, new TestConnectionListener());
@@ -100,15 +104,16 @@ namespace Lightstreamer.DotNet.Client.Test {
 
             if (!command) {
                 if (extended) {
-                    ExtendedTableInfo tableInfo= new ExtendedTableInfo(
+                    ExtendedTableInfo tableInfo = new ExtendedTableInfo(
                         new string[] { "item1", "item2", "item3" },
                         "MERGE",
                         new string[] { "last_price", "time", "pct_change" },
                         true
-                        );
+                        )
+                    {
+                        DataAdapter = "QUOTE_ADAPTER"
+                    };
 
-                    tableInfo.DataAdapter = "QUOTE_ADAPTER";
-                
                     SubscribedTableKey tableRef = myClient.SubscribeTable(
                         tableInfo,
                         new TestTableListenerForExtended(),
@@ -118,14 +123,15 @@ namespace Lightstreamer.DotNet.Client.Test {
                     tableRefs = new SubscribedTableKey[] { tableRef };
 
                 } else if (multiple) {
-                    ExtendedTableInfo tableInfo= new ExtendedTableInfo(
+                    ExtendedTableInfo tableInfo = new ExtendedTableInfo(
                         new string[] { "item1", "item2", "item3" },
                         "MERGE",
                         new string[] { "last_price", "time", "pct_change" },
                         true
-                        );
-
-                    tableInfo.DataAdapter = "QUOTE_ADAPTER";
+                        )
+                    {
+                        DataAdapter = "QUOTE_ADAPTER"
+                    };
 
                     tableRefs = myClient.SubscribeItems(
                         tableInfo,
@@ -138,14 +144,15 @@ namespace Lightstreamer.DotNet.Client.Test {
                     string groupName = "item1 item2 item3";
                     string schemaName = "last_price time pct_change";
 
-                    SimpleTableInfo tableInfo= new SimpleTableInfo(
-                        groupName, 
-                        "MERGE", 
-                        schemaName, 
+                    SimpleTableInfo tableInfo = new SimpleTableInfo(
+                        groupName,
+                        "MERGE",
+                        schemaName,
                         true
-                        );
-
-                    tableInfo.DataAdapter = "QUOTE_ADAPTER";
+                        )
+                    {
+                        DataAdapter = "QUOTE_ADAPTER"
+                    };
 
                     SubscribedTableKey tableRef = myClient.SubscribeTable(
                         tableInfo,
@@ -162,9 +169,10 @@ namespace Lightstreamer.DotNet.Client.Test {
                         "COMMAND",
                         new String[] { "key", "command", "qty" },
                         true
-                        );
-
-                    tableInfo.DataAdapter = "PORTFOLIO_ADAPTER";
+                        )
+                    {
+                        DataAdapter = "PORTFOLIO_ADAPTER"
+                    };
 
                     SubscribedTableKey tableRef = myClient.SubscribeTable(
                         tableInfo,
@@ -185,9 +193,10 @@ namespace Lightstreamer.DotNet.Client.Test {
                         "COMMAND",
                         schemaName,
                         true
-                        );
-
-                    tableInfo.DataAdapter = "PORTFOLIO_ADAPTER";
+                        )
+                    {
+                        DataAdapter = "PORTFOLIO_ADAPTER"
+                    };
 
                     SubscribedTableKey tableRef = myClient.SubscribeTable(
                         tableInfo,
@@ -206,8 +215,10 @@ namespace Lightstreamer.DotNet.Client.Test {
             for (int i = 0; i < refs.Count; i++) allTableRefs[i] = (SubscribedTableKey)refs[i];
 
             Thread.Sleep(10000);
-            SubscriptionConstraints constraints = new SubscriptionConstraints();
-            constraints.MaxFrequency = 0.1;
+            SubscriptionConstraints constraints = new SubscriptionConstraints
+            {
+                MaxFrequency = 0.1
+            };
             myClient.ChangeSubscriptions(allTableRefs, constraints);
 
             Thread.Sleep(10000);
@@ -216,8 +227,10 @@ namespace Lightstreamer.DotNet.Client.Test {
             Thread.Sleep(5000);
         
             myClient.CloseConnection();
-        
-            Thread.Sleep(2000);
+
+            Console.WriteLine("The End!");
+
+            Thread.Sleep(20000);
             Environment.Exit(0);
         }
     }

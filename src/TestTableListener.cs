@@ -18,7 +18,7 @@
 
 using System;
 
-namespace Lightstreamer.DotNet.Client.Test {
+namespace Lightstreamer.DotNetStandard.Client.Test {
 
 	public class TestTableListenerForExtended : IHandyTableListener {
 

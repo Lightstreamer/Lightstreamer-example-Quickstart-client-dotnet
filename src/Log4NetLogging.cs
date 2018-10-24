@@ -16,10 +16,10 @@
 */
 #endregion License
 
-using Lightstreamer.DotNet.Client.Log;
+using Lightstreamer.DotNetStandard.Client.Log;
 using System.Collections.Generic;
 
-namespace Lightstreamer.DotNet.Client.Test
+namespace Lightstreamer.DotNetStandard.Client.Test
 {
     class Log4NetLoggerWrapper : ILogger
     {
