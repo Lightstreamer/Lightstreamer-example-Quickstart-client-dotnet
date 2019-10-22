@@ -16,16 +16,16 @@
 */
 #endregion License
 
-using Lightstreamer.DotNetStandard.Client.Log;
+using Lightstreamer.DotNet.Logging.Log;
 using System.Collections.Generic;
 
-namespace Lightstreamer.DotNetStandard.Client.Test
+namespace QuickstartClient
 {
     class Log4NetLoggerWrapper : ILogger
     {
-        private log4net.ILog wrapped;
+        private NLog.ILogger wrapped;
 
-        public Log4NetLoggerWrapper(log4net.ILog wrapped)
+        public Log4NetLoggerWrapper(NLog.ILogger wrapped)
         {
             this.wrapped = wrapped;
         }
@@ -37,7 +37,7 @@ namespace Lightstreamer.DotNetStandard.Client.Test
 
         public void Error(string line, System.Exception exception)
         {
-            this.wrapped.Error(line,exception);
+            this.wrapped.Error(line, exception);
         }
 
         public void Warn(string line)
@@ -47,7 +47,7 @@ namespace Lightstreamer.DotNetStandard.Client.Test
 
         public void Warn(string line, System.Exception exception)
         {
-            this.wrapped.Warn(line,exception);
+            this.wrapped.Warn(line, exception);
         }
 
         public void Info(string line)
@@ -57,7 +57,7 @@ namespace Lightstreamer.DotNetStandard.Client.Test
 
         public void Info(string line, System.Exception exception)
         {
-            this.wrapped.Info(line,exception);
+            this.wrapped.Info(line, exception);
         }
 
         public void Debug(string line)
@@ -67,7 +67,7 @@ namespace Lightstreamer.DotNetStandard.Client.Test
 
         public void Debug(string line, System.Exception exception)
         {
-            this.wrapped.Debug(line,exception);
+            this.wrapped.Debug(line, exception);
         }
 
         public void Fatal(string line)
@@ -77,7 +77,7 @@ namespace Lightstreamer.DotNetStandard.Client.Test
 
         public void Fatal(string line, System.Exception exception)
         {
-            this.wrapped.Fatal(line,exception);
+            this.wrapped.Fatal(line, exception);
         }
 
         public bool IsDebugEnabled
@@ -116,11 +116,11 @@ namespace Lightstreamer.DotNetStandard.Client.Test
             {
                 if (!logInstances.ContainsKey(category))
                 {
-                    logInstances[category] = new Log4NetLoggerWrapper(log4net.LogManager.GetLogger(category));
+                    logInstances[category] = new Log4NetLoggerWrapper(NLog.LogManager.GetLogger(category));
                 }
                 return logInstances[category];
             }
         }
-            
+
     }
 }
