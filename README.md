@@ -11,17 +11,17 @@ The Client API version in use in this example support the Unified Client API mod
 ## Details
 
 The example basically connects to the server and performs a subscription, printing on the console the incoming Item Updates.
-Some connection parameters and the type of subscription performed depend on the parameters passed in the command line; these can be:   
+Some connection parameters and the type of subscription performed depend on the parameters passed in the command line; which in the right order are:   
  - HOST: the complete hostname of the Lightstreamer server to target. For example to hit our Demos server use https://push.lightstreamer.com
  - MODE: should be 
-	* 0 for Stock-List subscription targetting the QUOTE_ADAPTER Data Adapter,
-	* 1 for Chat subscription targetting the CHAT_ROOM Data Adapter,
-	* 2 for Portfolio subscription targetting the PORTFOLIO_ADAPTER Data Adapter,
- - MAX_FREQUENCY: double value in oreder to request to the Lightstreamer server a max frequency 
- - FORCE_TRANSPORT: could be WS-STREAMING, HTTP-STREAMING, WS-POLLING, or HTTP-POLLING. If no value passed the STREAM-SENSE algorithm of the Lightstreamer client lib will set-up the connection with the best transport available
- - PROXY_ON: 0/1 to use or not to use a http proxy
- - PROXY_ADDRESS: in the case, the ip address of the http proxy
- - PROXY_PORT: in the case, the port to connect the http proxy
+	* 0 for Stock-List subscription targeting the QUOTE_ADAPTER Data Adapter
+	* 1 for Chat subscription targeting the CHAT_ROOM Data Adapter
+	* 2 for Portfolio subscription targeting the PORTFOLIO_ADAPTER Data Adapter
+ - [MAX_FREQUENCY]: double value in oreder to request to the Lightstreamer server a max frequency (optional)
+ - [FORCE_TRANSPORT]: could be WS-STREAMING, HTTP-STREAMING, WS-POLLING, or HTTP-POLLING. If no value passed the STREAM-SENSE algorithm of the Lightstreamer client lib will set-up the connection with the best transport available (optional)
+ - [PROXY_ON: 0/1] to use or not to use a http proxy (optional)
+ - [PROXY_ADDRESS]: in the case, the ip address of the http proxy (optional)
+ - [PROXY_PORT]: in the case, the port to connect the http proxy (optional)
  
 ### Dig the Code
 
@@ -29,8 +29,8 @@ The application is divided into 6 main classes.
 
 * `QuickStart.cs`: this is the main class, implementing the connection to the Lightstreamer server, the subscription of Items and in case of Chat mode the send of text messages.
 * `SystemOutClientListener.cs`: is a very basic custom implementation of the [ClientListener](https://lightstreamer.com/temp/temp_dotnet_unified_docs/api/com.lightstreamer.client.ClientListener.html) interface. An instance of this class, listening to a LightstreamerClient instance (through the addListener method) will print on the standard output informations about the status of the connection and will trigger the subscription request upon the status change event indicating the client session is alive.
-* `QuoteListener.cs`, `PortfolioListener.cs`, and `ChatSubscriptionListener.cs`: are very basic custom implementations of the [SubscriptionListener](https://lightstreamer.com/temp/temp_dotnet_unified_docs/api/com.lightstreamer.client.SubscriptionListener.html) interface. Basically jsut print on the console every event received.
-* `Log4NetLoggerWrapper.cs`: this is just a wrapper class to allow the client library to log through [NLog](https://www.nuget.org/packages/NLog/).
+* `QuoteListener.cs`, `PortfolioListener.cs`, and `ChatSubscriptionListener.cs`: are very basic custom implementations of the [SubscriptionListener](https://lightstreamer.com/temp/temp_dotnet_unified_docs/api/com.lightstreamer.client.SubscriptionListener.html) interface. Basically just print on the console every event received.
+* `Log4NetLoggerWrapper.cs`: this is a wrapper class to allow the client library to log through [NLog](https://www.nuget.org/packages/NLog/).
 
 
 ## Install 
