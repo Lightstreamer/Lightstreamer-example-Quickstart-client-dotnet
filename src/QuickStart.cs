@@ -146,91 +146,98 @@ namespace QuickstartClient
             string serverAddress = args[0];
 
             Console.WriteLine("Try connecting to " + serverAddress + " ... ");
-
-            ls = new LightstreamerClient(serverAddress, "DEMO");
-
-            if (args.Length > 1 )
+            try
             {
-                quick_mode = Int32.Parse(args[1]);
+                ls = new LightstreamerClient(serverAddress, "DEMO");
 
-                // Max Frequency
-                if (args.Length > 2)
+                if (args.Length > 1 )
                 {
-                    double max_freq = Double.Parse(args[2]);
-                    if ((max_freq > 0.0) && (max_freq < 200.0))
+                    quick_mode = Int32.Parse(args[1]);
+
+                    // Max Frequency
+                    if (args.Length > 2)
                     {
-
-                        Console.WriteLine("Max freq : " + max_freq);
-
-                        sub_max_freq = max_freq;
-                    }
-
-                    if (args.Length > 3)
-                    {
-
-                        forceT = args[3];
-
-                        Console.WriteLine("Trasport will be forced to: " + forceT);
-
-                        if (args.Length > 6)
+                        double max_freq = Double.Parse(args[2]);
+                        if ((max_freq > 0.0) && (max_freq < 200.0))
                         {
-                             if ( !Int32.TryParse(args[4], out proxy_on) )
+
+                            Console.WriteLine("Max freq : " + max_freq);
+
+                            sub_max_freq = max_freq;
+                        }
+
+                        if (args.Length > 3)
+                        {
+
+                            forceT = args[3];
+
+                            Console.WriteLine("Trasport will be forced to: " + forceT);
+
+                            if (args.Length > 6)
                             {
-                                proxy_on = 0;
+                                 if ( !Int32.TryParse(args[4], out proxy_on) )
+                                {
+                                    proxy_on = 0;
+                                }
+
+                                proxy_addr = args[5];
+
+                                 if ( Int32.TryParse(args[6], out proxy_port) )
+                                {
+                                    proxy_port = 80;
+                                }
+
+                                Console.WriteLine("Proxy On : " + proxy_on);
                             }
-
-                            proxy_addr = args[5];
-
-                             if ( Int32.TryParse(args[6], out proxy_port) )
-                            {
-                                proxy_port = 80;
-                            }
-
-                            Console.WriteLine("Proxy On : " + proxy_on);
                         }
                     }
-                }
-            } 
+                } 
 
-            Console.WriteLine(" ... ok ... " + ls.Status);
+                Console.WriteLine(" ... ok ... " + ls.Status);
 
-            ClientListener clientListener = new SystemOutClientListener();
-            ls.addListener(clientListener);
+                ClientListener clientListener = new SystemOutClientListener();
+                ls.addListener(clientListener);
 
-            ls.connectionOptions.ReconnectTimeout = 25000;
+                ls.connectionOptions.ReconnectTimeout = 25000;
 
-            if (!forceT.Equals("no", StringComparison.InvariantCultureIgnoreCase))
-            {
-                ls.connectionOptions.ForcedTransport = forceT;
-
-                Console.WriteLine(" ... forced transport to " + forceT + " ... ");
-            }
-
-            /*
-             * 
-             * To add custom headers to the http requests, this is the example code.
-             * 
-            */
-            // Console.WriteLine(" ... add my headers ... ");
-            // IDictionary<string, string> myheaders = new Dictionary<string, string>();
-            // myheaders.Add("Test-H", "12345hello");
-            // ls.connectionOptions.HttpExtraHeaders = myheaders;
-
-            if (proxy_on > 0)
-            {
-                ls.connectionOptions.Proxy = new Proxy("HTTP", "localhost", 53449);
-            }
-
-            ls.connect();
-            while (true)
-            {
-                string msg = Console.ReadLine();
-                if (quick_mode == 1)
+                if (!forceT.Equals("no", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    ls.sendMessage("CHAT|"+msg);
+                    ls.connectionOptions.ForcedTransport = forceT;
+
+                    Console.WriteLine(" ... forced transport to " + forceT + " ... ");
                 }
-                if (msg.Contains("Exit")) break;
+
+                /*
+                 * 
+                 * To add custom headers to the http requests, this is the example code.
+                 * 
+                */
+                // Console.WriteLine(" ... add my headers ... ");
+                // IDictionary<string, string> myheaders = new Dictionary<string, string>();
+                // myheaders.Add("Test-H", "12345hello");
+                // ls.connectionOptions.HttpExtraHeaders = myheaders;
+
+                if (proxy_on > 0)
+                {
+                    ls.connectionOptions.Proxy = new Proxy("HTTP", "localhost", 53449);
+                }
+            
+                ls.connect();
+                while (true)
+                {
+                    string msg = Console.ReadLine();
+                    if (quick_mode == 1)
+                    {
+                        ls.sendMessage("CHAT|" + msg);
+                    }
+                    if (msg.Contains("Exit")) break;
+                }
+            } catch (Exception e)
+            {
+                Console.WriteLine("Fatal Error: " + e.Message);
             }
+
+            Console.WriteLine("Exiting ... ");
             Console.ReadKey();
 
         }
