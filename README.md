@@ -2,7 +2,7 @@
 <!-- START DESCRIPTION lightstreamer-example-quickstart-client-dotnet -->
 The *Quickstart Example* provides the source code to build a very simple and basic client application, used to test the capability of the Client APIs to connect and receive data from Lightstreamer Server. The example can be used to familiarize with the Client APIs and as a reference on how to use them, and can be used as a starting point for client application implementations.
 
-This project contains the C# source files of a sample application, which shows how the [Lightstreamer .NET Standard Client API](https://lightstreamer.com/temp/temp_dotnet_unified_docs/) can be used to connect to Lightstreamer Server.
+This project contains the C# source files of a sample application, which shows how the [Lightstreamer .NET Standard Client API](https://lightstreamer.com/api/ls-dotnetstandard-client/latest/) can be used to connect to Lightstreamer Server.
 The Client API version in use in this example support the Unified Client API model (since Lightstreamer .NET Standard API 5.0.0).
 <!-- END DESCRIPTION lightstreamer-example-quickstart-client-dotnet -->
 
@@ -28,8 +28,8 @@ Some connection parameters and the type of subscription performed depend on the 
 The application is divided into 6 main classes.
 
 * `QuickStart.cs`: this is the main class, implementing the connection to the Lightstreamer server, the subscription of Items and in case of Chat mode the send of text messages.
-* `SystemOutClientListener.cs`: is a very basic custom implementation of the [ClientListener](https://lightstreamer.com/temp/temp_dotnet_unified_docs/api/com.lightstreamer.client.ClientListener.html) interface. An instance of this class, listening to a LightstreamerClient instance (through the addListener method) will print on the standard output informations about the status of the connection and will trigger the subscription request upon the status change event indicating the client session is alive.
-* `QuoteListener.cs`, `PortfolioListener.cs`, and `ChatSubscriptionListener.cs`: are very basic custom implementations of the [SubscriptionListener](https://lightstreamer.com/temp/temp_dotnet_unified_docs/api/com.lightstreamer.client.SubscriptionListener.html) interface. Basically just print on the console every event received.
+* `SystemOutClientListener.cs`: is a very basic custom implementation of the [ClientListener](https://lightstreamer.com/api/ls-dotnetstandard-client/latest/api/com.lightstreamer.client.ClientListener.html) interface. An instance of this class, listening to a LightstreamerClient instance (through the addListener method) will print on the standard output informations about the status of the connection and will trigger the subscription request upon the status change event indicating the client session is alive.
+* `QuoteListener.cs`, `PortfolioListener.cs`, and `ChatSubscriptionListener.cs`: are very basic custom implementations of the [SubscriptionListener](https://lightstreamer.com/api/ls-dotnetstandard-client/latest/api/com.lightstreamer.client.SubscriptionListener.html) interface. Basically just print on the console every event received.
 * `Log4NetLoggerWrapper.cs`: this is a wrapper class to allow the client library to log through [NLog](https://www.nuget.org/packages/NLog/).
 
 
@@ -58,9 +58,9 @@ To build a version of this example, pointing to your local Lightstreamer Server 
 * Add all the files provided in the `sources` folder of this project; from the "Add -> Existing Item" dialog.
 * You should complete this project with the [Lightstreamer .NET Standard Client library](https://www.nuget.org/packages/Lightstreamer.DotNetStandard.Client/5.0.0-beta), to be used for the build process, trough NuGet. Follow these steps:
 	* In the "Solution Explorer" tab, right click on the project and choose `Manage NuGet Packages ...`
-	* In the Search text box enter `Lightstreamer` and be sure to flag the *Include preliminary version* check-box
-	* Choose the Lightstreamer.DotNetStandard.Client last version then click `Install` and then `Ok`
-	* Check out that among the References of your project Lightstreamer_DotNet_Standard_Client was added.
+	* In the Search text box enter `Lightstreamer`
+	* Choose the <b>Lightstreamer.DotNetStandard.Client</b> last version then click `Install` and then `Ok`
+	* Check out that among the References of your project <i>Lightstreamer_DotNet_Client_Unified</i> was added.
 * As in the previous steps add to your project also the reference to [NLog](https://www.nuget.org/packages/NLog/).
 * Build solutions and run the demo.
 
