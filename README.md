@@ -78,6 +78,7 @@ To build a version of this example, pointing to your local Lightstreamer Server 
 <!-- END RELATED_ENTRIES -->
 ### Related Projects 
 
+* [Lightstreamer .NET Standard Client SDK](https://github.com/Lightstreamer/Lightstreamer-lib-client-dotnet)
 * [Lightstreamer - Basic Stock-List Demo - .NET Client](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet)
 
 ## Lightstreamer Compatibility Notes
