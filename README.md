@@ -35,15 +35,10 @@ The application is divided into 6 main classes.
 
 ## Install 
 
-If you want to install a version of this demo pointing to your local Lightstreamer Server, follow these steps:
+If you want to install a version of this demo pointing to our Demo Server, follow these steps:
 
-* you'll need to install the following adapters (depending on which quickstart example you want to run you might not need them all):
-	* The *CHAT_ROOM* (see the [Lightstreamer - Basic Chat Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Chat-adapter-java)). 
-	* The *QUOTE_ADAPTER* (see the [Lightstreamer - Stock-List Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-StockList-adapter-java)) 
-	* The *PORTFOLIO_ADAPTER* ( see the [Lightstreamer - Portfolio Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Portfolio-adapter-java)), 
-  Follow the instructions on those projects to get them up and running (in the portfolio case, you'll need the *full version*).
+
 * Since the app is an example of **Framework-Dependent Deployment (FDD)** relies on the presence of a shared system-wide version of .NET Core on the target system.
-* Launch Lightstreamer Server.
 * Download the `deploy.zip` file that you can find in the [deploy release](https://github.com/Lightstreamer/Lightstreamer-example-Quickstart-client-dotnet/releases) of this project and extract the `deploy_local` folder.
 * Execute the `LaunchMe.bat`.
 
@@ -52,7 +47,13 @@ If you want to install a version of this demo pointing to your local Lightstream
 
 To build a version of this example, pointing to your local Lightstreamer Server instance, follow the steps below.
 
-* Exactly as in the previous section, you should install in your Lightstreamer server the *CHAT_ROOM* or the *PORTFOLIO_ADAPTER* or the *QUOTE_ADAPTER*. If you want to skip the Adapters installation you could target our Demos server (http://push.lightstreamer.com).
+* you'll need to install the following adapters (depending on which quickstart example you want to run you might not need them all):
+	* The *CHAT_ROOM* (see the [Lightstreamer - Basic Chat Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Chat-adapter-java)). 
+	* The *QUOTE_ADAPTER* (see the [Lightstreamer - Stock-List Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-StockList-adapter-java)) 
+	* The *PORTFOLIO_ADAPTER* ( see the [Lightstreamer - Portfolio Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Portfolio-adapter-java)), 
+  Follow the instructions on those projects to get them up and running (in the portfolio case, you'll need the *full version*).
+  <i>[If you want to skip the Adapters installation you could target our Demos server (http://push.lightstreamer.com)]</i>
+* Launch the Lightstreamer Server.
 * Create a new C# project: from the "New Project..." wizard, choose the ".NET Core" and then "App Console" template.
 * From the "Solution Explorer", delete the default `Program.cs`.
 * Add all the files provided in the `sources` folder of this project; from the "Add -> Existing Item" dialog.

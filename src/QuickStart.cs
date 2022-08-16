@@ -218,7 +218,7 @@ namespace QuickstartClient
                 Console.WriteLine("Want Proxy ? " + proxy_on);
                 if (proxy_on > 0)
                 {
-                    ls.connectionOptions.Proxy = new Proxy("HTTP", proxy_addr, proxy_port, "1", "1");
+                    ls.connectionOptions.Proxy = new Proxy("HTTP", proxy_addr, proxy_port);
 
                     Console.WriteLine(" ... set connection proxy to " + proxy_addr + " : " + proxy_port);
                 }
