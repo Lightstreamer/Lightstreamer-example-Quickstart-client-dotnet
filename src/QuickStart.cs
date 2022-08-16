@@ -141,7 +141,7 @@ namespace QuickstartClient
 
             LightstreamerClient.setLoggerProvider(new Log4NetLoggerProviderWrapper());
             
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Args passed: " + args.Length);
 
             string serverAddress = args[0];
 
@@ -175,19 +175,17 @@ namespace QuickstartClient
 
                             if (args.Length > 6)
                             {
-                                 if ( !Int32.TryParse(args[4], out proxy_on) )
+                                if ( !Int32.TryParse(args[4], out proxy_on) )
                                 {
                                     proxy_on = 0;
                                 }
 
                                 proxy_addr = args[5];
 
-                                 if ( Int32.TryParse(args[6], out proxy_port) )
+                                if ( !Int32.TryParse(args[6], out proxy_port) )
                                 {
                                     proxy_port = 80;
                                 }
-
-                                Console.WriteLine("Proxy On : " + proxy_on);
                             }
                         }
                     }
@@ -217,9 +215,12 @@ namespace QuickstartClient
                 // myheaders.Add("Test-H", "12345hello");
                 // ls.connectionOptions.HttpExtraHeaders = myheaders;
 
+                Console.WriteLine("Want Proxy ? " + proxy_on);
                 if (proxy_on > 0)
                 {
-                    ls.connectionOptions.Proxy = new Proxy("HTTP", "localhost", 53449);
+                    ls.connectionOptions.Proxy = new Proxy("HTTP", proxy_addr, proxy_port, "1", "1");
+
+                    Console.WriteLine(" ... set connection proxy to " + proxy_addr + " : " + proxy_port);
                 }
             
                 ls.connect();

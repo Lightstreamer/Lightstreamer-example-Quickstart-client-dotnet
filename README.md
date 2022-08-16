@@ -17,9 +17,9 @@ Some connection parameters and the type of subscription performed depend on the 
 	* 0 for Stock-List subscription targeting the QUOTE_ADAPTER Data Adapter
 	* 1 for Chat subscription targeting the CHAT_ROOM Data Adapter
 	* 2 for Portfolio subscription targeting the PORTFOLIO_ADAPTER Data Adapter
- - [MAX_FREQUENCY]: double value in oreder to request to the Lightstreamer server a max frequency (optional)
- - [FORCE_TRANSPORT]: could be WS-STREAMING, HTTP-STREAMING, WS-POLLING, or HTTP-POLLING. If no value passed the STREAM-SENSE algorithm of the Lightstreamer client lib will set-up the connection with the best transport available (optional)
- - [PROXY_ON: 0/1] to use or not to use a http proxy (optional)
+ - [MAX_FREQUENCY]: double value in oreder to request to the Lightstreamer server a max frequency, 0.0 means unlimited (optional)
+ - [FORCE_TRANSPORT]: could be WS-STREAMING, HTTP-STREAMING, WS-POLLING, or HTTP-POLLING. If no value passed or 'no' string passed the STREAM-SENSE algorithm of the Lightstreamer client lib will set-up the connection with the best transport available (optional)
+ - [PROXY_ON]: 0/1 flag to use or not to use an http proxy (optional)
  - [PROXY_ADDRESS]: in the case, the ip address of the http proxy (optional)
  - [PROXY_PORT]: in the case, the port to connect the http proxy (optional)
  
