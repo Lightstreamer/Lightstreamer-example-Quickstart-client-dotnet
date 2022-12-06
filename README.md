@@ -56,14 +56,16 @@ To build a version of this example, pointing to your local Lightstreamer Server 
 * Launch the Lightstreamer Server.
 * Create a new C# project: from the "New Project..." wizard, choose the ".NET Core" and then "App Console" template.
 * From the "Solution Explorer", delete the default `Program.cs`.
-* Add all the files provided in the `sources` folder of this project; from the "Add -> Existing Item" dialog.
+* Add all the files provided in the `src` folder of this project; from the "Add -> Existing Item" dialog.
 * You should complete this project with the [Lightstreamer .NET Standard Client library](https://www.nuget.org/packages/Lightstreamer.DotNetStandard.Client/5.0.0-beta), to be used for the build process, trough NuGet. Follow these steps:
 	* In the "Solution Explorer" tab, right click on the project and choose `Manage NuGet Packages ...`
 	* In the Search text box enter `Lightstreamer`
 	* Choose the <b>Lightstreamer.DotNetStandard.Client</b> last version then click `Install` and then `Ok`
-	* Check out that among the References of your project <i>Lightstreamer_DotNet_Client_Unified</i> was added.
+	* Check out that among the References of your project <i>Lightstreamer.DotNetStandard.Client</i> was added.
 * As in the previous steps add to your project also the reference to [NLog](https://www.nuget.org/packages/NLog/).
-* Build solutions and run the demo.
+* Build solution.
+* In the "Launch profiles" add as "Command Line Arguments": `https://push.lightstreamer.com`
+* Run the demo.
 
 
 ## See Also
