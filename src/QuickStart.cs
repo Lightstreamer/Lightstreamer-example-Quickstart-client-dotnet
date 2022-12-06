@@ -137,6 +137,10 @@ namespace QuickstartClient
 
             NLog.LogManager.Configuration = config;
 
+            // DotNetty tuning
+            Environment.SetEnvironmentVariable("io.netty.allocator.maxOrder", "1");
+            Environment.SetEnvironmentVariable("io.netty.allocator.type", "unpooled");
+
             // InternalLoggerFactory.DefaultFactory.AddProvider(new ConsoleLoggerProvider((s, level) => true, false));
 
             LightstreamerClient.setLoggerProvider(new Log4NetLoggerProviderWrapper());
