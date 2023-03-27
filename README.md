@@ -3,7 +3,7 @@
 The *Quickstart Example* provides the source code to build a very simple and basic client application, used to test the capability of the Client APIs to connect and receive data from Lightstreamer Server. The example can be used to familiarize with the Client APIs and as a reference on how to use them, and can be used as a starting point for client application implementations.
 
 This project contains the C# source files of a sample application, which shows how the [Lightstreamer .NET Standard Client API](https://lightstreamer.com/api/ls-dotnetstandard-client/latest/) can be used to connect to Lightstreamer Server.
-The Client API version in use in this example support the Unified Client API model (since Lightstreamer .NET Standard API 5.0.0).
+The Client API version in use in this example support the Unified Client API model.
 <!-- END DESCRIPTION lightstreamer-example-quickstart-client-dotnet -->
 
 ![screenshot](screen_qs.png)
@@ -30,8 +30,6 @@ The application is divided into 6 main classes.
 * `QuickStart.cs`: this is the main class, implementing the connection to the Lightstreamer server, the subscription of Items and in case of Chat mode the send of text messages.
 * `SystemOutClientListener.cs`: is a very basic custom implementation of the [ClientListener](https://lightstreamer.com/api/ls-dotnetstandard-client/latest/api/com.lightstreamer.client.ClientListener.html) interface. An instance of this class, listening to a LightstreamerClient instance (through the addListener method) will print on the standard output information about the status of the connection and will trigger the subscription request upon the status change event indicating the client session is alive.
 * `QuoteListener.cs`, `PortfolioListener.cs`, and `ChatSubscriptionListener.cs`: are very basic custom implementations of the [SubscriptionListener](https://lightstreamer.com/api/ls-dotnetstandard-client/latest/api/com.lightstreamer.client.SubscriptionListener.html) interface. Basically just print on the console every event received.
-* `Log4NetLoggerWrapper.cs`: this is a wrapper class to allow the client library to log through [NLog](https://www.nuget.org/packages/NLog/).
-
 
 ## Install 
 
@@ -57,12 +55,11 @@ To build a version of this example, pointing to your local Lightstreamer Server 
 * Create a new C# project: from the "New Project..." wizard, choose the ".NET Core" and then "App Console" template.
 * From the "Solution Explorer", delete the default `Program.cs`.
 * Add all the files provided in the `src` folder of this project; from the "Add -> Existing Item" dialog.
-* You should complete this project with the [Lightstreamer .NET Standard Client library](https://www.nuget.org/packages/Lightstreamer.DotNetStandard.Client/5.0.0-beta), to be used for the build process, trough NuGet. Follow these steps:
+* You should complete this project with the [Lightstreamer .NET Standard Client library](https://www.nuget.org/packages/Lightstreamer.DotNetStandard.Client/), to be used for the build process, trough NuGet. Follow these steps:
 	* In the "Solution Explorer" tab, right click on the project and choose `Manage NuGet Packages ...`
 	* In the Search text box enter `Lightstreamer`
 	* Choose the <b>Lightstreamer.DotNetStandard.Client</b> last version then click `Install` and then `Ok`
 	* Check out that among the References of your project <i>Lightstreamer.DotNetStandard.Client</i> was added.
-* As in the previous steps add to your project also the reference to [NLog](https://www.nuget.org/packages/NLog/).
 * Build solution.
 * In the "Launch profiles" add as "Command Line Arguments": `https://push.lightstreamer.com`
 * Run the demo.
@@ -81,11 +78,13 @@ To build a version of this example, pointing to your local Lightstreamer Server 
 <!-- END RELATED_ENTRIES -->
 ### Related Projects 
 
-* [Lightstreamer .NET Standard Client SDK](https://github.com/Lightstreamer/Lightstreamer-lib-client-dotnet)
+* [Lightstreamer .NET Standard Client SDK](https://github.com/Lightstreamer/Lightstreamer-lib-client-haxe)
 * [Lightstreamer - Basic Stock-List Demo - .NET Client](https://github.com/Lightstreamer/Lightstreamer-example-StockList-client-dotnet)
 
 ## Lightstreamer Compatibility Notes
 
-- Compatible with Lightstreamer .NET Standard Client Library version 5.0.0 or newer.
-- For instructions compatible with .NET Standard Client library version 4.x, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-Quickstart-client-dotnet/releases/tag/for_version_4).
+- Compatible with Lightstreamer .NET Standard Client Library version 6 or newer.
+- Compatible with Lightstreamer Server 7.3.2 or newer.
+- For a version of this demo compatible with Lightstreamer .NET Standard Client Library version 5.x, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-Quickstart-client-dotnet/releases/tag/for_version_5).
+- For a version of this demo compatible with .NET Standard Client library version 4.x, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-Quickstart-client-dotnet/releases/tag/for_version_4).
 - Ensure that .NET Standard Client API is supported by Lightstreamer Server license configuration.
