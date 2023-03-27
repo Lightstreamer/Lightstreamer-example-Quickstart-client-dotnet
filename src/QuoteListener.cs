@@ -66,12 +66,12 @@ namespace QuickstartClient
             }
         }
 
-        void SubscriptionListener.onListenEnd(Subscription subscription)
+        void SubscriptionListener.onListenEnd()
         {
             // throw new System.NotImplementedException();
         }
 
-        void SubscriptionListener.onListenStart(Subscription subscription)
+        void SubscriptionListener.onListenStart()
         {
             // throw new System.NotImplementedException();
         }

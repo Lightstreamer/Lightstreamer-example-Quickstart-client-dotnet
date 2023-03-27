@@ -17,7 +17,7 @@
 #endregion License
 
 using com.lightstreamer.client;
-using NLog;
+using com.lightstreamer.log;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -126,24 +126,7 @@ namespace QuickstartClient
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
-            var config = new NLog.Config.LoggingConfiguration();
-
-            var logfile = new NLog.Targets.FileTarget("logfile") { FileName = "Test.log" };
-            var logconsole = new NLog.Targets.ConsoleTarget("logconsole");
-
-            // config.AddRule(LogLevel.Debug, LogLevel.Fatal, logconsole);
-            config.AddRule(LogLevel.Warn, LogLevel.Fatal, logconsole);
-            config.AddRule(LogLevel.Info, LogLevel.Fatal, logfile);
-
-            NLog.LogManager.Configuration = config;
-
-            // DotNetty tuning
-            Environment.SetEnvironmentVariable("io.netty.allocator.maxOrder", "1");
-            Environment.SetEnvironmentVariable("io.netty.allocator.type", "unpooled");
-
-            // InternalLoggerFactory.DefaultFactory.AddProvider(new ConsoleLoggerProvider((s, level) => true, false));
-
-            LightstreamerClient.setLoggerProvider(new Log4NetLoggerProviderWrapper());
+            LightstreamerClient.setLoggerProvider(new ConsoleLoggerProvider(ConsoleLogLevel.WARN));
             
             Console.WriteLine("Args passed: " + args.Length);
 
@@ -197,7 +180,7 @@ namespace QuickstartClient
 
                 Console.WriteLine(" ... ok ... " + ls.Status);
 
-                ClientListener clientListener = new SystemOutClientListener();
+                ClientListener clientListener = new SystemOutClientListener(ls);
                 ls.addListener(clientListener);
 
                 ls.connectionOptions.ReconnectTimeout = 25000;

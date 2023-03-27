@@ -27,20 +27,17 @@ namespace QuickstartClient
 
         private bool resub = true;
 
-        public SystemOutClientListener()
+        public SystemOutClientListener(LightstreamerClient client)
         {
-        }
-
-        public void onListenEnd(LightstreamerClient client)
-        {
-            Console.WriteLine("Listen End - " + client.Status + " - ");
-            this.client = null;
-        }
-
-        public void onListenStart(LightstreamerClient client)
-        {
-            Console.WriteLine("Listen Start - " + client.Status + " - ");
             this.client = client;
+        }
+
+        public void onListenEnd()
+        {
+        }
+
+        public void onListenStart()
+        {
         }
 
         public void onPropertyChange(string property)
