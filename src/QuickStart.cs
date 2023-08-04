@@ -32,7 +32,8 @@ namespace QuickstartClient
     /// QUOTE_ADAPTER, PORTFOLIO_ADAPTER, or CHAT_ROOM Data Adapters depending on 
     /// parameter passed in the command line. In case of CHAT_ROOM it is
     /// also possible to send messages to the CHAT Metadata Adapter by leveraging
-    /// the Console.ReadLine utility.
+    /// the Console.ReadLine utility. In case of PORTFOLIO_ADAPTER, an order entry
+    /// facility is also demonstrated.
     /// It requires that Lightstreamer Server is running with the
     /// proper Adapter Set, for more details please refer to the GitHub
     /// project (https://github.com/Lightstreamer/Lightstreamer-example-Quickstart-client-dotnet).
@@ -49,7 +50,18 @@ namespace QuickstartClient
     ///  - PROXY_ON: 0/1 to use or not to use a http proxy
     ///  - PROXY_ADDRESS: in the case, the ip address of the http proxy
     ///  - PROXY_PORT: in the case, the port to connect the http proxy
+    /// or with the following ones:
+    /// >dotnet QuickStart5.dll HOST MODE ITEM QUANTITY [PROXY_ON PROXY_ADDRESS PROXY_PORT]
+    ///  - HOST: the complete hostname of the Lightstreamer server to target. For example to hit our 
+    ///          Demos server use https://push.lightstreamer.com
+    ///  - MODE: 3 for ORDER ENTRY
+    ///  - ITEM: name of an item supported by the Portfolio Demo 
+    ///  - QUANTITY: number of stocks to buy or (if negative) to sell
+    ///  - PROXY_ON: 0/1 to use or not to use a http proxy
+    ///  - PROXY_ADDRESS: in the case, the ip address of the http proxy
+    ///  - PROXY_PORT: in the case, the port to connect the http proxy
     /// 
+    /// In order to see the updates caused by the OREDR ENTRY version, the PORTFOLIO version should be run concurrently.
     /// </summary>
     class QuickStart
     {
@@ -66,6 +78,12 @@ namespace QuickstartClient
         private static int proxy_port = 80;
 
         private static string forceT = "no";
+
+        private static string order_item = null;
+
+        private static int order_qty = 0;
+
+        private static bool order_is_buy = true;
 
         public static void SubscribeStocks()
         {
@@ -136,38 +154,69 @@ namespace QuickstartClient
                 {
                     quick_mode = Int32.Parse(args[1]);
 
-                    // Max Frequency
-                    if (args.Length > 2)
+                    if (quick_mode != 3)
                     {
-                        double max_freq = Double.Parse(args[2]);
-                        if ((max_freq > 0.0) && (max_freq < 200.0))
+                        // Max Frequency
+                        if (args.Length > 2)
                         {
+                            double max_freq = Double.Parse(args[2]);
+                            if ((max_freq > 0.0) && (max_freq < 200.0))
+                            {
 
-                            Console.WriteLine("Max freq : " + max_freq);
+                                Console.WriteLine("Max freq : " + max_freq);
 
-                            sub_max_freq = max_freq;
+                                sub_max_freq = max_freq;
+                            }
+
+                            if (args.Length > 3)
+                            {
+
+                                forceT = args[3];
+
+                                Console.WriteLine("Trasport will be forced to: " + forceT);
+
+                                if (args.Length > 6)
+                                {
+                                    if ( !Int32.TryParse(args[4], out proxy_on) )
+                                    {
+                                        proxy_on = 0;
+                                    }
+
+                                    proxy_addr = args[5];
+
+                                    if ( !Int32.TryParse(args[6], out proxy_port) )
+                                    {
+                                        proxy_port = 80;
+                                    }
+                                }
+                            }
+                        }
+                    } else
+                    {
+                        // Item and quantity
+                        order_item = args[2];
+
+                        order_qty = int.Parse(args[3]);
+                        if (order_qty < 0)
+                        {
+                            order_is_buy = false;
+                            order_qty = - order_qty;
                         }
 
-                        if (args.Length > 3)
+                        Console.WriteLine("Will " + (order_is_buy ? "buy" : "sell") + " " + order_qty + " stocks of " + order_item);
+
+                        if (args.Length > 6)
                         {
-
-                            forceT = args[3];
-
-                            Console.WriteLine("Trasport will be forced to: " + forceT);
-
-                            if (args.Length > 6)
+                            if (!Int32.TryParse(args[4], out proxy_on))
                             {
-                                if ( !Int32.TryParse(args[4], out proxy_on) )
-                                {
-                                    proxy_on = 0;
-                                }
+                                proxy_on = 0;
+                            }
 
-                                proxy_addr = args[5];
+                            proxy_addr = args[5];
 
-                                if ( !Int32.TryParse(args[6], out proxy_port) )
-                                {
-                                    proxy_port = 80;
-                                }
+                            if (!Int32.TryParse(args[6], out proxy_port))
+                            {
+                                proxy_port = 80;
                             }
                         }
                     }
@@ -198,6 +247,10 @@ namespace QuickstartClient
                 else if (quick_mode == 0)
                 {
                     adapterSet = "DEMO";
+                }
+                else if (quick_mode == 3)
+                {
+                    adapterSet = "FULLPORTFOLIODEMO";
                 }
 
                 ls = new LightstreamerClient(serverAddress, adapterSet);
@@ -237,6 +290,13 @@ namespace QuickstartClient
                 ls.connect();
                 while (true)
                 {
+                    if (quick_mode == 3)
+                    {
+                        string PREFIX = order_is_buy ? "BUY|" : "SELL|";
+                        string s = PREFIX + "portfolio1|" + order_item + "|" + order_qty;
+                        ClientMessageListener messageListener = new OrderMessageListener();
+                        ls.sendMessage(s, "orders", 500, messageListener, true);
+                    }
                     string msg = Console.ReadLine();
                     if (quick_mode == 1)
                     {

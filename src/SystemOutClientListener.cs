@@ -76,7 +76,7 @@ namespace QuickstartClient
                 {
                     QuickStart.SubscribeCommand();
                 }
-                else
+                else if (QuickStart.quick_mode == 0)
                 {
                     QuickStart.SubscribeStocks();
                 }

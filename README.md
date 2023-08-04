@@ -22,12 +22,23 @@ Some connection parameters and the type of subscription performed depend on the 
  - [PROXY_ON]: 0/1 flag to use or not to use an http proxy (optional)
  - [PROXY_ADDRESS]: in the case, the ip address of the http proxy (optional)
  - [PROXY_PORT]: in the case, the port to connect the http proxy (optional)
+
+One more functionality shown is the submission of a message representing an order for the Portfolio Demo. To run this case, the parameters to be passed in the command line are:   
+ - HOST: the complete hostname of the Lightstreamer server to target. For example to hit our Demos server use https://push.lightstreamer.com
+ - MODE: should be 
+	* 3 for Order submission message targeting the PORTFOLIO_ADAPTER Data Adapter
+ - [ITEM]: name of an item supported by the Portfolio Demo
+ - [QUANTITY]: number of stocks to buy or (if negative) to sell
+ - [PROXY_ON]: 0/1 flag to use or not to use an http proxy (optional)
+ - [PROXY_ADDRESS]: in the case, the ip address of the http proxy (optional)
+ - [PROXY_PORT]: in the case, the port to connect the http proxy (optional)
  
 ### Dig the Code
 
 The application is divided into 6 main classes.
 
-* `QuickStart.cs`: this is the main class, implementing the connection to the Lightstreamer server, the subscription of Items and in case of Chat mode the send of text messages.
+* `QuickStart.cs`: this is the main class, implementing the connection to the Lightstreamer server, the subscription of Items and, in case of Chat and Order mode, the send of text messages.
+* `OrderMessageListener.cs`: is a very basic implementation of the [ClientMessageListener](https://lightstreamer.com/api/ls-dotnetstandard-client/latest/api/com.lightstreamer.client.ClientMessageListener.html) interface. Basically just print on the console every feedback received from the order message submission.
 * `SystemOutClientListener.cs`: is a very basic custom implementation of the [ClientListener](https://lightstreamer.com/api/ls-dotnetstandard-client/latest/api/com.lightstreamer.client.ClientListener.html) interface. An instance of this class, listening to a LightstreamerClient instance (through the addListener method) will print on the standard output information about the status of the connection and will trigger the subscription request upon the status change event indicating the client session is alive.
 * `QuoteListener.cs`, `PortfolioListener.cs`, and `ChatSubscriptionListener.cs`: are very basic custom implementations of the [SubscriptionListener](https://lightstreamer.com/api/ls-dotnetstandard-client/latest/api/com.lightstreamer.client.SubscriptionListener.html) interface. Basically just print on the console every event received.
 
@@ -38,7 +49,7 @@ If you want to install a version of this demo pointing to our Demo Server, follo
 
 * Since the app is an example of **Framework-Dependent Deployment (FDD)** relies on the presence of a shared system-wide version of .NET Core on the target system.
 * Download the `deploy.zip` file that you can find in the [deploy release](https://github.com/Lightstreamer/Lightstreamer-example-Quickstart-client-dotnet/releases) of this project and extract the `deploy_local` folder.
-* Execute the `LaunchMe.bat`.
+* Execute the `LaunchMe.bat`; you can modify it and change the parameters to run the various demo versions.
 
 
 ## Build
