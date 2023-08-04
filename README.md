@@ -50,7 +50,7 @@ To build a version of this example, pointing to your local Lightstreamer Server 
 	* The *QUOTE_ADAPTER* (see the [Lightstreamer - Stock-List Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-StockList-adapter-java)) 
 	* The *PORTFOLIO_ADAPTER* ( see the [Lightstreamer - Portfolio Demo - Java Adapter](https://github.com/Lightstreamer/Lightstreamer-example-Portfolio-adapter-java)), 
   Follow the instructions on those projects to get them up and running (in the portfolio case, you'll need the *full version*).
-  <i>[If you want to skip the Adapters installation you could target our Demos server (http://push.lightstreamer.com)]</i>
+  <i>[If you want to skip the Adapters installation you could target our Demos server (see below)]</i>
 * Launch the Lightstreamer Server.
 * Create a new C# project: from the "New Project..." wizard, choose the ".NET Core" and then "App Console" template.
 * From the "Solution Explorer", delete the default `Program.cs`.
@@ -61,7 +61,8 @@ To build a version of this example, pointing to your local Lightstreamer Server 
 	* Choose the <b>Lightstreamer.DotNetStandard.Client</b> last version then click `Install` and then `Ok`
 	* Check out that among the References of your project <i>Lightstreamer.DotNetStandard.Client</i> was added.
 * Build solution.
-* In the "Launch profiles" add as "Command Line Arguments": `https://push.lightstreamer.com`
+* In the "Launch profiles" add as "Command Line Arguments" suitable values for the quickstart example you want to run (see above).
+  The HOST argument should be `http://localhost`; however, if you skipped the Adapter installation, you could address our Demo Server: `https://push.lightstreamer.com`
 * Run the demo.
 
 

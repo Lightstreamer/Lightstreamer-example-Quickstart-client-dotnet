@@ -37,7 +37,7 @@ namespace QuickstartClient
     /// proper Adapter Set, for more details please refer to the GitHub
     /// project (https://github.com/Lightstreamer/Lightstreamer-example-Quickstart-client-dotnet).
     /// 
-    /// The test can be invoked with following parameter:
+    /// The test can be invoked with following parameters:
     /// >dotnet QuickStart5.dll HOST MODE [MAX_FREQUENCY] [FORCE_TRANSPORT] [PROXY_ON PROXY_ADDRESS PROXY_PORT]
     ///  - HOST: the complete hostname of the Lightstreamer server to target. For example to hit our 
     ///          Demos server use https://push.lightstreamer.com
@@ -50,9 +50,6 @@ namespace QuickstartClient
     ///  - PROXY_ADDRESS: in the case, the ip address of the http proxy
     ///  - PROXY_PORT: in the case, the port to connect the http proxy
     /// 
-    /// In order for the COMMAND based versions to produce updates, a PortfolioDemo
-    /// should be opened on the same Server and order entry operations should
-    /// be performed manually.
     /// </summary>
     class QuickStart
     {
@@ -135,8 +132,6 @@ namespace QuickstartClient
             Console.WriteLine("Try connecting to " + serverAddress + " ... ");
             try
             {
-                ls = new LightstreamerClient(serverAddress, "DEMO");
-
                 if (args.Length > 1 )
                 {
                     quick_mode = Int32.Parse(args[1]);
@@ -177,6 +172,35 @@ namespace QuickstartClient
                         }
                     }
                 } 
+
+                // On push.lightstreamer.com, there is a single Adapter Set, named "DEMO"
+                // which is addressed by both the Chat, StockList, and Portfolio demos
+                // available @ http://demos.lightstreamer.com/
+                // On the other hand, if the Adapter Sets for these demos are installed
+                // on a local instance of Lightstreamer Server by following the instructions
+                // for the three demo Adapters, then three different Adapter Sets will be
+                // configured, with different names.
+                // The Data Adapter names of each demo are the same in both cases.
+
+                string adapterSet = null;
+                if (serverAddress.Contains("push.lightstreamer.com"))
+                {
+                    adapterSet = "DEMO";
+                }
+                else if (quick_mode == 1)
+                {
+                    adapterSet = "CHAT";
+                }
+                else if (quick_mode == 2)
+                {
+                    adapterSet = "FULLPORTFOLIODEMO";
+                }
+                else if (quick_mode == 0)
+                {
+                    adapterSet = "DEMO";
+                }
+
+                ls = new LightstreamerClient(serverAddress, adapterSet);
 
                 Console.WriteLine(" ... ok ... " + ls.Status);
 
