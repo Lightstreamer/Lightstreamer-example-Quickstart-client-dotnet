@@ -84,7 +84,6 @@ To build a version of this example, pointing to your local Lightstreamer Server 
 ## Lightstreamer Compatibility Notes
 
 - Compatible with Lightstreamer .NET Standard Client Library version 6 or newer.
-- Compatible with Lightstreamer Server 7.3.2 or newer.
 - For a version of this demo compatible with Lightstreamer .NET Standard Client Library version 5.x, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-Quickstart-client-dotnet/releases/tag/for_version_5).
 - For a version of this demo compatible with .NET Standard Client library version 4.x, please refer to [this tag](https://github.com/Lightstreamer/Lightstreamer-example-Quickstart-client-dotnet/releases/tag/for_version_4).
 - Ensure that .NET Standard Client API is supported by Lightstreamer Server license configuration.
