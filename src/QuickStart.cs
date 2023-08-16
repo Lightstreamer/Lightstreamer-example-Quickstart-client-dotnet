@@ -288,16 +288,22 @@ namespace QuickstartClient
                 }
             
                 ls.connect();
+                if (quick_mode == 1)
+                {
+                    Console.WriteLine("Type messages to chat");
+                }
+                if (quick_mode == 3)
+                {
+                    string PREFIX = order_is_buy ? "BUY|" : "SELL|";
+                    string s = PREFIX + "portfolio1|" + order_item + "|" + order_qty;
+                    ClientMessageListener messageListener = new OrderMessageListener();
+                    ls.sendMessage(s, "orders", 500, messageListener, true);
+                }
+                Console.WriteLine("To exit, type: Exit");
                 while (true)
                 {
-                    if (quick_mode == 3)
-                    {
-                        string PREFIX = order_is_buy ? "BUY|" : "SELL|";
-                        string s = PREFIX + "portfolio1|" + order_item + "|" + order_qty;
-                        ClientMessageListener messageListener = new OrderMessageListener();
-                        ls.sendMessage(s, "orders", 500, messageListener, true);
-                    }
                     string msg = Console.ReadLine();
+                    if (msg == null) break;
                     if (quick_mode == 1)
                     {
                         ls.sendMessage("CHAT|" + msg);
